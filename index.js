@@ -66,6 +66,8 @@ PhpManifestPlugin.prototype.apply = function apply (compiler) {
 
     return files;
   }
+  var getMjsFiles = withExtension('.mjs');
+  var getSvgFiles = withExtension('.svg');
 
   var arrayToPhpStatic = function(list, varname) {
     var out = '\n  static $' + varname + ' = ['
@@ -111,6 +113,8 @@ PhpManifestPlugin.prototype.apply = function apply (compiler) {
     var out = objectToPhpClass(phpClassName, {
       jsFiles: getJsFiles(stats.assetsByChunkName, filepath),
       cssFiles: getCssFiles(stats.assetsByChunkName, filepath),
+      mjsFiles: getMjsFiles(stats.assetsByChunkName, filepath),
+      svgFiles: getSvgFiles(stats.assetsByChunkName, filepath),
     });
 
     // Write file using fs
